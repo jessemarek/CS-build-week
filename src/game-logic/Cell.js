@@ -1,6 +1,6 @@
 export class Cell {
     constructor(x, y) {
-        this.isAlive = Math.floor(Math.random() * 2)
+        this.isAlive = false
         this.age = 0
         this.x = x
         this.y = y
@@ -15,8 +15,8 @@ export class Cell {
         let rows = grid[0].length
 
         // look at the neighboring cells and add them to the count if they're alive
-        for (i = -1; i < 2; i++) {
-            for (j = -1; j < 2; j++) {
+        for (let i = -1; i < 2; i++) {
+            for (let j = -1; j < 2; j++) {
                 let col = (this.x + i + cols) % cols
                 let row = (this.y + j + rows) % rows
 
