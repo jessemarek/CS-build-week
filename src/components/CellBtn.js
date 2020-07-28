@@ -6,7 +6,9 @@ const CellBtn = props => {
         isAlive,
         age,
         x,
-        y
+        y,
+        grid,
+        setGrid
 
     } = props
 
@@ -32,10 +34,23 @@ const CellBtn = props => {
     }
     // ------------------------------------------------------------ //
 
+    const clickHandler = e => {
+        e.preventDefault()
+
+        // make a copy of the current grid
+        let next = grid.map(col => col.map(row => row.clone()))
+        // change the copy grid target cell to opposite of its previous state
+        next[x][y].isAlive = !grid[x][y].isAlive
+
+        // update the current grid with the new one
+        setGrid(next)
+    }
+
     return (
         <div
             className={isAlive ? 'alive cell-btn' : 'cell-btn'}
             style={{ background: isAlive ? color : 'transparent' }}
+            onClick={clickHandler}
         ></div>
     )
 }

@@ -48,7 +48,7 @@ function App() {
         <h3>Generation #{genNum}</h3>
         <div className="game-window">
           {
-            grid && grid.map((col, x) => col.map((row, y) => <CellBtn key={uuid()} isAlive={row.isAlive} age={row.age} x={x} y={y} />))
+            grid && grid.map((col, x) => col.map((row, y) => <CellBtn key={uuid()} isAlive={row.isAlive} age={row.age} x={x} y={y} grid={grid} setGrid={setGrid} />))
           }
         </div>
         <div className="game-btns">
