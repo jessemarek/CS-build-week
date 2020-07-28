@@ -4,6 +4,7 @@ import { Cell } from './Cell'
 module.exports = {
     makeGrid,
     fillGrid,
+    randInitCells,
     lifecycle
 }
 
@@ -28,6 +29,17 @@ const fillGrid = (grid) => {
             grid[i][j] = new Cell(i, j)
         }
     }
+}
+
+// Randomly sets the initial state of each Cell's isAlive to true or false 
+const randInitCells = (grid) => {
+
+    grid.forEach(col => col.forEach(row => {
+
+        let num = Math.floor(Math.random() * 2)
+        num ? row.isAlive = true : row.isAlive = false
+
+    }))
 }
 
 // Calculate a new generation of Cells
