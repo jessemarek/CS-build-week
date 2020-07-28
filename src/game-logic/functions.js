@@ -3,7 +3,8 @@ import { Cell } from './Cell'
 // export the functions
 module.exports = {
     makeGrid,
-    fillGrid
+    fillGrid,
+    lifecycle
 }
 
 // constructs a grid (2d array) with x number of columns and y number of rows
@@ -27,4 +28,13 @@ const fillGrid = (grid) => {
             grid[i][j] = new Cell(i, j)
         }
     }
+}
+
+// Calculate a new generation of Cells
+const lifecycle = (grid) => {
+    // get the number of neighbors for each Cell
+    grid.forEach(col => col.forEach(row => row.countNeighbors(grid)))
+
+    // return a new copy of the grid filled with the next generation
+    return grid.map(col => col.map(row => row.next_gen()))
 }

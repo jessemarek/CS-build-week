@@ -8,7 +8,7 @@ export class Cell {
 
     }
 
-    // count the number of alive neighbors
+    // Count the number of alive neighbors
     countNeighbors(grid) {
         let count = 0
         let cols = grid.length
@@ -56,5 +56,19 @@ export class Cell {
                 this.isAlive = true
             }
         }
+    }
+
+    // Clones this Cell object
+    clone() {
+        // create new instance of Cell with this Cell's x, y coord
+        let clone = new Cell(this.x, this.y)
+
+        // set all of the clone's props to this Cell's props
+        clone.isAlive = this.isAlive
+        clone.age = this.age
+        clone.neighbors = this.neighbors
+
+        // return the cloned Obj
+        return clone
     }
 }
