@@ -1,4 +1,4 @@
-class Cell {
+export class Cell {
     constructor(x, y) {
         this.isAlive = Math.floor(Math.random() * 2)
         this.age = 0
