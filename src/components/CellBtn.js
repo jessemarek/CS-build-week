@@ -11,33 +11,23 @@ const CellBtn = props => {
     } = props
 
     let color
-    switch (age) {
-        case 0:
-            color = 'crimson'
-            break;
-        case 1:
-            color = 'orange'
-            break;
-
-        case 2:
-            color = 'yellow'
-            break;
-
-        case 3:
-            color = 'green'
-            break;
-
-        case 4:
-            color = 'blue'
-            break;
-
-        case 5:
-            color = 'purple'
-            break;
-
-        default:
-            color = 'purple'
-            break;
+    if (age <= 2) {
+        color = 'crimson'
+    }
+    else if (age <= 4) {
+        color = 'orange'
+    }
+    else if (age <= 8) {
+        color = 'yellow'
+    }
+    else if (age <= 16) {
+        color = 'green'
+    }
+    else if (age <= 32) {
+        color = 'blue'
+    }
+    else {
+        color = 'purple'
     }
 
     return (

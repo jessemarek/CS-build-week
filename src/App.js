@@ -7,13 +7,23 @@ import CellBtn from './components/CellBtn'
 function App() {
   const initGrid = makeGrid(25, 25)
   fillGrid(initGrid)
-  //randInitCells(initGrid)
 
   const [grid, setGrid] = useState(initGrid)
+  const [gameIsRunning, setGameIsRunning] = useState(false)
+  const [genNum, setGenNum] = useState(0)
 
   /* useEffect(() => {
-    setGrid(lifecycle(grid))
-  }, []) */
+    if (gameIsRunning) {
+      setGrid(lifecycle(grid))
+    }
+
+  }, [grid, gameIsRunning]) */
+
+  const playGame = e => {
+    e.preventDefault()
+
+    setGameIsRunning(!gameIsRunning)
+  }
 
   const clickRandom = e => {
     e.preventDefault()
@@ -21,18 +31,34 @@ function App() {
     setGrid(randInitCells(grid))
   }
 
+  const clickNextGen = e => {
+    e.preventDefault()
+
+    setGrid(lifecycle(grid))
+    setGenNum(genNum + 1)
+  }
+
+  const resetGame = e => {
+    e.preventDefault()
+
+    setGenNum(0)
+    setGrid(initGrid)
+  }
+
   return (
     <div className="App">
       <div>
+        <h3>Generation #{genNum}</h3>
         <div className="game-window">
           {
             grid && grid.map((col, x) => col.map((row, y) => <CellBtn key={uuid()} isAlive={row.isAlive} age={row.age} x={x} y={y} />))
           }
         </div>
         <div className="game-btns">
-          <button>play / pause</button>
-          <button>Next Generation</button>
+          <button onClick={playGame}>{gameIsRunning ? 'Pause' : 'Play'}</button>
+          <button onClick={clickNextGen}>Next Generation</button>
           <button onClick={clickRandom}>Randomize</button>
+          <button onClick={resetGame}>Reset</button>
         </div>
       </div>
     </div>
