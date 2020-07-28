@@ -47,6 +47,16 @@ const lifecycle = (grid) => {
     // get the number of neighbors for each Cell
     grid.forEach(col => col.forEach(row => row.countNeighbors(grid)))
 
-    // return a new copy of the grid filled with the next generation
-    return grid.map(col => col.map(row => row.next_gen()))
+    // make a new copy of the grid filled with the next generation
+    let next = grid.map(col => {
+        return col.map(row => {
+            // clone each Cell
+            let clone = row.clone()
+            clone.next_gen()
+
+            return clone
+        })
+    })
+
+    return next
 }
