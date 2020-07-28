@@ -12,12 +12,9 @@ function App() {
   const [gameIsRunning, setGameIsRunning] = useState(false)
   const [genNum, setGenNum] = useState(0)
 
-  /* useEffect(() => {
-    if (gameIsRunning) {
-      setGrid(lifecycle(grid))
-    }
-
-  }, [grid, gameIsRunning]) */
+  /*   useEffect(() => {
+  
+    }, [grid, gameIsRunning]) */
 
   const playGame = e => {
     e.preventDefault()
@@ -56,9 +53,9 @@ function App() {
         </div>
         <div className="game-btns">
           <button onClick={playGame}>{gameIsRunning ? 'Pause' : 'Play'}</button>
-          <button onClick={clickNextGen}>Next Generation</button>
-          <button onClick={clickRandom}>Randomize</button>
-          <button onClick={resetGame}>Reset</button>
+          <button disabled={gameIsRunning} onClick={clickNextGen}>Next Gen</button>
+          <button disabled={gameIsRunning} onClick={clickRandom}>Randomize</button>
+          <button disabled={gameIsRunning} onClick={resetGame}>Reset</button>
         </div>
       </div>
     </div>

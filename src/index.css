@@ -6,10 +6,17 @@
     line-height: 1.5;
 }
 
+h3 {
+    text-align: center;
+    margin: 5% auto 0;
+}
+
 .game-window {
     display: grid;
     grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
     grid-gap: 2px;
+    width: 50%;
+    margin: 2% auto;
 }
 
 .cell-btn {
@@ -18,4 +25,14 @@
     border: 1px solid black;
     border-radius: 3px;
     transition: all 0.5s ease;
+}
+
+.game-btns {
+    width: 50%;
+    margin: 0 auto;
+}
+
+button {
+    width: 21%;
+    margin: 0 2%;
 }

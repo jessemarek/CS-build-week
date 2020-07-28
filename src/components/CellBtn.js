@@ -10,6 +10,7 @@ const CellBtn = props => {
 
     } = props
 
+    // change color based on the age of the cell
     let color
     if (age <= 2) {
         color = 'crimson'
@@ -29,6 +30,7 @@ const CellBtn = props => {
     else {
         color = 'purple'
     }
+    // ------------------------------------------------------------ //
 
     return (
         <div
