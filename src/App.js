@@ -1,25 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { makeGrid, fillGrid, randInitCells, lifecycle } from './game-logic/functions'
-import { v4 as uuid } from 'uuid'
 
 import CellBtn from './components/CellBtn'
 
 function App() {
-  const initGrid = makeGrid(25, 25)
+  let numCols = 25
+  let numRows = 25
+
+  const initGrid = makeGrid(numCols, numRows)
   fillGrid(initGrid)
 
   const [grid, setGrid] = useState(initGrid)
   const [gameIsRunning, setGameIsRunning] = useState(false)
   const [genNum, setGenNum] = useState(0)
 
-  /*   useEffect(() => {
-  
-    }, [grid, gameIsRunning]) */
+  const runningRef = useRef(gameIsRunning)
+  runningRef.current = gameIsRunning
 
-  const playGame = e => {
+  const runSimulation = useCallback(() => {
+    if (!runningRef.current) {
+      return
+    }
+
+    setGenNum(g => g + 1)
+    setGrid(g => lifecycle(g))
+
+    setTimeout(runSimulation, 16.67)
+
+  }, [])
+
+  const clickPlay = e => {
     e.preventDefault()
 
     setGameIsRunning(!gameIsRunning)
+    if (!gameIsRunning) {
+      runningRef.current = true
+      runSimulation()
+    }
   }
 
   const clickRandom = e => {
@@ -46,13 +63,24 @@ function App() {
     <div className="App">
       <div>
         <h3>Generation #{genNum}</h3>
-        <div className="game-window">
+        <div className="game-window" style={{ gridTemplateRows: `repeat(${numCols}, 15px)` }}>
           {
-            grid && grid.map((col, x) => col.map((row, y) => <CellBtn key={uuid()} isAlive={row.isAlive} age={row.age} x={x} y={y} grid={grid} setGrid={setGrid} />))
+            grid &&
+            grid.map((col, x) => col.map((row, y) =>
+              <CellBtn
+                key={`${x}-${y}`}
+                isAlive={row.isAlive}
+                age={row.age}
+                x={x}
+                y={y}
+                grid={grid}
+                setGrid={setGrid}
+                gameIsRunning={gameIsRunning}
+              />))
           }
         </div>
         <div className="game-btns">
-          <button onClick={playGame}>{gameIsRunning ? 'Pause' : 'Play'}</button>
+          <button onClick={clickPlay}>{gameIsRunning ? 'Pause' : 'Play'}</button>
           <button disabled={gameIsRunning} onClick={clickNextGen}>Next Gen</button>
           <button disabled={gameIsRunning} onClick={clickRandom}>Randomize</button>
           <button disabled={gameIsRunning} onClick={resetGame}>Reset</button>

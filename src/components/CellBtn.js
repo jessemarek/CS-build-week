@@ -8,7 +8,8 @@ const CellBtn = props => {
         x,
         y,
         grid,
-        setGrid
+        setGrid,
+        gameIsRunning
 
     } = props
 
@@ -21,13 +22,13 @@ const CellBtn = props => {
         color = 'orange'
     }
     else if (age <= 8) {
-        color = 'yellow'
+        color = 'gold'
     }
     else if (age <= 16) {
-        color = 'green'
+        color = 'limegreen'
     }
     else if (age <= 32) {
-        color = 'blue'
+        color = 'dodgerblue'
     }
     else {
         color = 'purple'
@@ -37,19 +38,25 @@ const CellBtn = props => {
     const clickHandler = e => {
         e.preventDefault()
 
-        // make a copy of the current grid
-        let next = grid.map(col => col.map(row => row.clone()))
-        // change the copy grid target cell to opposite of its previous state
-        next[x][y].isAlive = !grid[x][y].isAlive
+        if (!gameIsRunning) {
+            // make a copy of the current grid
+            let next = grid.map(col => col.map(row => row.clone()))
+            // change the copy grid target cell to opposite of its previous state
+            next[x][y].isAlive = !grid[x][y].isAlive
 
-        // update the current grid with the new one
-        setGrid(next)
+            // update the current grid with the new one
+            setGrid(next)
+
+        }
     }
 
     return (
         <div
             className={isAlive ? 'alive cell-btn' : 'cell-btn'}
-            style={{ background: isAlive ? color : 'transparent' }}
+            style={{
+                background: isAlive ? color : 'transparent',
+                cursor: gameIsRunning ? 'default' : 'pointer'
+            }}
             onClick={clickHandler}
         ></div>
     )

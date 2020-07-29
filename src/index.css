@@ -13,7 +13,7 @@ h3 {
 
 .game-window {
     display: grid;
-    grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
+    grid-auto-flow: column;
     grid-gap: 2px;
     width: 50%;
     margin: 2% auto;
@@ -24,7 +24,6 @@ h3 {
     height: 15px;
     border: 1px solid black;
     border-radius: 3px;
-    transition: all 0.5s ease;
 }
 
 .game-btns {
@@ -35,4 +34,5 @@ h3 {
 button {
     width: 21%;
     margin: 0 2%;
+    cursor: pointer;
 }
