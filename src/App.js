@@ -6,8 +6,8 @@ import GameRules from './components/GameRules'
 
 function App() {
   // init variables
-  let numCols = 25
-  let numRows = 25
+  let numCols = 40
+  let numRows = 40
 
   const initGrid = makeGrid(numCols, numRows)
   fillGrid(initGrid)
@@ -95,7 +95,7 @@ function App() {
       <div className="game-container">
         <h3>Generation #{genNum}</h3>
 
-        <div className="game-window" style={{ gridTemplateRows: `repeat(${numCols}, 15px)` }}>
+        <div className="game-window" style={{ gridTemplateRows: `repeat(${numCols}, 10px)` }}>
           {
             grid &&
             grid.map((col, x) => col.map((row, y) =>
