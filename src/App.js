@@ -16,6 +16,7 @@ function App() {
   const [gameIsRunning, setGameIsRunning] = useState(false)
   const [genNum, setGenNum] = useState(0)
   const [gameSpeed, setGameSpeed] = useState(60)
+  const [gridCoord, setGridCoord] = useState(['--', '--'])
 
   // REFS ***********************************************************************************************************************
   const runningRef = useRef(gameIsRunning)
@@ -90,37 +91,39 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h3>Generation #{genNum}</h3>
-        <div className="game-window" style={{ gridTemplateRows: `repeat(${numCols}, 15px)` }}>
-          {
-            grid &&
-            grid.map((col, x) => col.map((row, y) =>
-              <CellBtn
-                key={`${x}-${y}`}
-                isAlive={row.isAlive}
-                age={row.age}
-                x={x}
-                y={y}
-                grid={grid}
-                setGrid={setGrid}
-                gameIsRunning={gameIsRunning}
-              />))
-          }
-        </div>
-        <div className="game-btns">
-          <button onClick={clickPlay}>{gameIsRunning ? 'Stop' : 'Start'}</button>
-          <button disabled={gameIsRunning} onClick={clickNextGen}>Next Gen</button>
-          <button disabled={gameIsRunning} onClick={clickRandom}>Randomize</button>
-          <button disabled={gameIsRunning} onClick={resetGame}>Reset</button>
-        </div>
-        <div className="speed-ctrl">
-          <label>Simulation Speed
-            <input type="range" min="1" max="120" value={gameSpeed} onChange={sliderChange} />
-            <p>{`${gameSpeed} Frames per second`}</p>
-          </label>
-        </div>
+
+      <h3>Generation #{genNum}</h3>
+      <div className="game-window" style={{ gridTemplateRows: `repeat(${numCols}, 15px)` }}>
+        {
+          grid &&
+          grid.map((col, x) => col.map((row, y) =>
+            <CellBtn
+              key={`${x}-${y}`}
+              isAlive={row.isAlive}
+              age={row.age}
+              x={x}
+              y={y}
+              grid={grid}
+              setGrid={setGrid}
+              gameIsRunning={gameIsRunning}
+              setGridCoord={setGridCoord}
+            />))
+        }
       </div>
+      <p className="coords">{gridCoord && `${gridCoord[0]}, ${gridCoord[1]}`}</p>
+      <div className="game-btns">
+        <button onClick={clickPlay}>{gameIsRunning ? 'Stop' : 'Start'}</button>
+        <button disabled={gameIsRunning} onClick={clickNextGen}>Next Gen</button>
+        <button disabled={gameIsRunning} onClick={clickRandom}>Randomize</button>
+        <button disabled={gameIsRunning} onClick={resetGame}>Reset</button>
+      </div>
+      <div className="speed-ctrl">
+        <label>Simulation Speed
+            <input type="range" min="1" max="120" value={gameSpeed} onChange={sliderChange} />
+          <p>{`${gameSpeed} Frames per second`}</p>
+        </label>
+      </div>
+
     </div>
   );
 }

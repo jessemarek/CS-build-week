@@ -9,7 +9,8 @@ const CellBtn = props => {
         y,
         grid,
         setGrid,
-        gameIsRunning
+        gameIsRunning,
+        setGridCoord
 
     } = props
 
@@ -35,6 +36,7 @@ const CellBtn = props => {
     }
     // ------------------------------------------------------------ //
 
+    // toggle the alive state on mouse click
     const clickHandler = e => {
         e.preventDefault()
 
@@ -50,6 +52,18 @@ const CellBtn = props => {
         }
     }
 
+    // update grid coordinates of this cell on mouse enter
+    const onMouseEnter = e => {
+        setGridCoord([
+            x, y
+        ])
+    }
+
+    // reset grid coordinates to default on mouse leave
+    const onMouseLeave = e => {
+        setGridCoord(['--', '--'])
+    }
+
     return (
         <div
             className={isAlive ? 'alive cell-btn' : 'cell-btn'}
@@ -58,6 +72,8 @@ const CellBtn = props => {
                 cursor: gameIsRunning ? 'default' : 'pointer'
             }}
             onClick={clickHandler}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
         ></div>
     )
 }

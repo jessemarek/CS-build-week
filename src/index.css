@@ -6,6 +6,11 @@
     line-height: 1.5;
 }
 
+body {
+    background: #001;
+    color: #ffe;
+}
+
 h3 {
     text-align: center;
     margin: 5% auto 0;
@@ -16,14 +21,20 @@ h3 {
     grid-auto-flow: column;
     grid-gap: 2px;
     width: 50%;
-    margin: 2% auto;
+    margin: 2% auto 0;
 }
 
 .cell-btn {
     width: 15px;
     height: 15px;
-    border: 1px solid black;
+    border: 1px solid #555;
     border-radius: 3px;
+}
+
+.coords {
+    width: 50%;
+    font-size: 12px;
+    margin: 0 auto 3%;
 }
 
 .game-btns {
@@ -35,21 +46,36 @@ button {
     width: 21%;
     margin: 0 2%;
     cursor: pointer;
+    outline: none;
+    border-radius: 7px;
+    padding: 1% 2%;
+    border: none;
+    background: #aaa;
+    color: #000;
+}
+
+button:disabled {
+    opacity: 0.5;
 }
 
 .speed-ctrl {
     width: 50%;
     margin: 3% auto;
+    border-radius: 7px;
+    background: #aaa;
+    color: #000;
 }
 
 .speed-ctrl label {
     display: block;
     text-align: center;
-    border: 1px solid;
 }
 
 .speed-ctrl input {
     display: block;
     width: 75%;
-    margin: 0 auto;
+    height: 5px;
+    margin: 2% auto;
+    border-radius: 5px;
+    cursor: pointer;
 }
