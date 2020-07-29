@@ -36,3 +36,20 @@ button {
     margin: 0 2%;
     cursor: pointer;
 }
+
+.speed-ctrl {
+    width: 50%;
+    margin: 3% auto;
+}
+
+.speed-ctrl label {
+    display: block;
+    text-align: center;
+    border: 1px solid;
+}
+
+.speed-ctrl input {
+    display: block;
+    width: 75%;
+    margin: 0 auto;
+}
