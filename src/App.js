@@ -92,6 +92,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Conway's Game of Life</h1>
       <div className="game-container">
         <h3>Generation #{genNum}</h3>
 
