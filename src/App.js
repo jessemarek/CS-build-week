@@ -1,14 +1,21 @@
 import React, { useState, useCallback, useRef } from 'react';
+
+// Game logic functions
 import { makeGrid, fillGrid, randInitCells, lifecycle } from './game-logic/functions'
 
+// Preset coordinates
+import { preset_1, preset_2, preset_3, preset_4 } from './game-logic/presets'
+
+// Components
 import CellBtn from './components/CellBtn'
 import GameRules from './components/GameRules'
 
 function App() {
   // init variables
-  let numCols = 40
-  let numRows = 40
+  const numCols = 40
+  const numRows = 40
 
+  // initial grid filled with cells in dead state
   const initGrid = makeGrid(numCols, numRows)
   fillGrid(initGrid)
 
@@ -88,6 +95,22 @@ function App() {
     setGameSpeed(e.target.value)
   }
 
+  // Sets specific coordinates to alive for the initial state of the grid
+  const loadPreset = (coords) => {
+
+    // make a copy of the blank grid state
+    let new_grid = [...initGrid]
+
+    // loop through the coordinates that are given and set each cell to alive state
+    coords.forEach(coord => {
+      new_grid[coord[0]][coord[1]].isAlive = true
+    })
+
+    // reset the generation counter and set the new grid state
+    setGenNum(0)
+    setGrid(new_grid)
+  }
+
   // ****************************************************************************************************************************
 
   return (
@@ -128,6 +151,15 @@ function App() {
             <p>{`${gameSpeed} Frames per second`}</p>
           </label>
         </div>
+
+        <div className="game-btns">
+          <button onClick={() => loadPreset(preset_1)}>Pre Set 1</button>
+          <button onClick={() => loadPreset(preset_2)}>Pre Set 2</button>
+          <button onClick={() => loadPreset(preset_3)}>Pre Set 3</button>
+          <button onClick={() => loadPreset(preset_4)}>Pre Set 4</button>
+        </div>
+
+
       </div>
       <GameRules />
 
